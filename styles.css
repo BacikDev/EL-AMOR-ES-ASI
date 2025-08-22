@@ -1,0 +1,792 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url(./assets/fonts/Inter-VariableFont_slnt\,wght.ttf);
+}
+
+body{
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    font-family: 'Inter';
+    user-select: none;
+}
+
+main{
+    max-height: 100vh;
+    max-width: 100%;
+}
+
+.background{
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    z-index: -1;
+
+    & img{
+        position: absolute;
+        margin: auto;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        min-width: 50%;
+        min-height: 50%;
+        filter: blur(15px);
+        -webkit-filter: blur(50px);
+        transform: scale(1.1);
+    }
+}
+
+header{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 5rem;
+
+    & img{
+        width: 100%;
+        height: 100%;
+        filter: drop-shadow(0 1rem 2rem rgb(233, 233, 233));
+    }
+}
+
+.container{
+    background-color: #e7e7e7;
+    margin: 14rem auto;
+    height: 34rem;
+    width: 22rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: 2rem;
+    box-shadow: 0 .4rem 1rem rgba(0, 0, 0, 0.3);
+    
+
+    &:hover{
+            box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.6);
+    }
+}
+
+.player-img{
+    margin: 0 auto;
+    width: 21rem;
+    height: 18rem;
+    position: relative;
+    top: -10%;
+    overflow: hidden;
+
+    &:hover{
+        animation: remove-overflow 2s forwards;
+    }
+    &:not(:hover){
+        animation: show-overflow 2s forwards;
+    }
+    &:not(:hover) .card-data{
+        animation: remove-data 1s forwards;
+    }
+
+    &:hover .card-data{
+        animation: show-data 1s forwards;
+        opacity: 1;
+        transition: opacity .3s;
+    }
+
+    & img{
+        object-fit: fill;
+        border-radius: 1rem;
+        height: 0;
+        width: 0;
+        opacity: 0;
+        position: absolute;
+
+
+        &.active{
+            width: 100%;
+            height: 100%;
+            transition: all 0.5;
+            opacity: 1;
+        }
+    }
+}
+
+h2{
+    font-size: 1.8rem;
+    text-align: center;
+    font-weight: 700;
+    margin-top: 1rem;
+}
+h4{
+    font-size: 1.4rem;
+    text-align: center;
+    font-weight: 700;
+}
+
+h3{
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: 600;
+    margin-top: .3rem;
+}
+
+.player-progress{
+    background-color: #fff;
+    border-radius: 1rem;
+    cursor: pointer;
+    margin: 2rem 1rem 2.3rem;
+    height: 6px;
+
+    & .progress{
+        background-color: #212121;
+        border-radius: 2rem;
+        height: 100%;
+        width: 0;
+        transition: width 0.1s linear;
+    }
+
+    & .music-duration{
+        position: relative;
+        top: -1.8rem;
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.player-controls{
+    position: relative;
+    display: flex;
+    gap: 2rem;
+    margin: 0 auto 1rem;
+
+    & .fa-solid{
+        font-size: 2rem;
+        color: #666;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover{
+            filter: brightness(40%);
+        }
+    }
+
+    & .play-button{
+        font-size: 3.5rem;
+        position: relative;
+    }
+}
+
+footer{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 3rem;
+    overflow: hidden;
+
+    & img{
+        position: relative;
+        width: 150%;
+        height: 100%;
+        filter: drop-shadow(0 15px 30px rgb(255, 250, 250));
+    }
+}
+
+.card-data{
+    width: 20rem;
+    height: 15rem;
+    overflow: auto;
+    border-radius: 10px;
+    position: absolute;
+    padding: 1rem;
+    margin: 0 .5rem;
+    bottom: -190px;
+    background-color: #e7e7e7;
+    z-index: 3;
+    box-shadow: 0 3px 7px 3px rgba(0, 0, 0, .6);
+    opacity: .5;
+    transition: opacity 1s 1s;
+}
+
+
+@keyframes show-data{
+    50%{
+        transform: translateY(-15rem);
+    }
+    100%{
+        transform: translateY(-7rem);
+    }
+}
+
+@keyframes remove-overflow {
+    to{
+        overflow: initial;
+    }
+}
+
+@keyframes remove-data {
+    0%{
+        transform: translateY(-7rem);
+    }
+    50%{
+        transform: translateY(-15rem);
+    }
+    100%{
+        transform: translateY(-.2rem);
+    }
+}
+
+@keyframes show-overflow {
+    0%{
+        overflow: initial;
+        pointer-events: none;
+    }
+    50%{
+        overflow: hidden;
+    }
+}
+
+@media  (width > 1025px) {
+    header{
+        height: 300px;
+    }
+
+    .container{
+        max-height: 1900px;
+        max-width: 1100px;
+        border-radius: 100px;
+    }
+
+    h2{
+        font-size: 80px;
+        margin: 120px 0 30px;
+    }
+    h3{
+        font-size: 70px;
+    }
+
+    .player-img{
+        width: 1050px;
+        height: 1000px;
+        top: -100px;
+        left: 23px;
+        border-radius: 80px;
+    }
+
+    .player-progress{
+        border-radius: 5px;
+        margin: 150px 40px 55px;
+        height: 26px;
+
+        & .progress{
+            border-radius: 25px;
+        }
+
+        & .music-duration{
+            top: -85px;
+        }
+
+        & span{
+            font-size: 44px;
+            font-weight: 600;
+            margin: 0 20px;
+        }
+    }
+    .player-controls{
+        gap: 125px;
+        left: 200px;
+        width: 200px;
+        top: 130px;
+    
+        & .fa-solid{
+            font-size: 130px;
+        }
+    
+        & .play-button{
+            font-size: 145px;
+        }
+    }
+    
+.card-data{
+    width: 1000px;
+    height: 820px;
+    border-radius: 40px;
+    left: 25px;
+    bottom: -700px;
+    padding: 60px 30px;
+
+    & span{
+        font-size: 52px;
+    }
+}
+
+    footer{
+        height: 200px;
+    }
+
+    @keyframes show-data{
+        50%{
+            transform: translateY(-45rem);
+        }
+    }
+
+    @keyframes remove-data {
+        0%{
+            transform: translateY(-7rem);
+        }
+        50%{
+            transform: translateY(-50rem);
+        }
+        100%{
+            transform: translateY(-.2rem);
+        }
+    }
+}
+
+@media (width > 769px) and (width < 1025px) {
+
+    header{
+        height: 10rem;
+    }
+
+    footer{
+        height: 5rem;
+    }
+
+    .container{
+        height: 65rem;
+        width: 50rem;
+    }
+
+    .player-img{
+        margin: 0 auto;
+        width: 50rem;
+        height: 35rem;
+        top: -5%;
+    }
+
+.player-progress{
+
+    & .music-duration{
+        margin: 0 1rem;
+        top: -3rem;
+    }
+    }
+
+ .player-progress span{
+        font-size: 1.8rem;
+    }
+    
+    .player-controls{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        gap: 7rem;
+        margin: 5rem auto 1rem;
+
+        & .fa-solid{
+            font-size: 3.5rem;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover{
+                filter: brightness(40%);
+            }
+        }
+
+        & .play-button{
+            font-size: 5.5rem;
+            position: relative;
+        }
+    }
+
+    h2{
+        margin: 0 auto 0;
+        font-size: 3.5rem;
+    }
+
+    h4{
+        font-size: 3.3rem;
+    }
+    h3{
+        font-size: 3rem;
+    }
+
+    .card-data{
+        width: 49rem;
+        height: 43.5rem;
+        margin: 0.5rem;
+        top: 10.5rem;
+
+        & span{
+            font-size: 2rem;
+        }
+    }
+
+    @keyframes show-data{
+        50%{
+            transform: translateY(-10rem);
+        }
+    }
+    
+    @keyframes remove-data {
+        0%{
+            transform: translateY(-1rem);
+        }
+        50%{
+            transform: translateY(-10rem);
+        }
+        100%{
+            transform: translateY(2rem);
+        }
+    }
+}
+@media (width > 429px) and (width < 769px) {
+
+    .container{
+        margin: 13rem 0 0;
+        height: 31.5rem;
+        width: 22rem;
+    }
+
+    h2{
+        font-size: 2rem;
+        margin: 120px 0 30px;
+    }
+    h3{
+        font-size: 1.8rem;
+    }
+
+    .player-img{
+        margin: 0 auto;
+        width: 18rem;
+        height: 15rem;
+        top: -5%;
+    }
+
+ .player-progress span{
+        font-size: .8rem;
+    }
+    
+    .player-controls{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin: 0 auto 1rem;
+
+        & .fa-solid{
+            font-size: 1.5rem;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover{
+                filter: brightness(40%);
+            }
+        }
+
+        & .play-button{
+            font-size: 2.5rem;
+            position: relative;
+        }
+    }
+
+    h2{
+        margin: 3rem auto 0;
+        font-size: 1.5rem;
+    }
+    h3{
+        font-size: 1.2rem;
+    }
+
+    .card-data{
+        width: 17.4rem;
+        height: 13.5rem;
+        margin: 0 .3rem;
+        top: 10.5rem;
+
+        & span{
+            font-size: 1rem;
+        }
+    }
+
+    @keyframes show-data{
+        50%{
+            transform: translateY(-10rem);
+        }
+    }
+    
+    @keyframes remove-data {
+        0%{
+            transform: translateY(-1rem);
+        }
+        50%{
+            transform: translateY(-10rem);
+        }
+        100%{
+            transform: translateY(2rem);
+        }
+    }
+}
+@media (width > 391px) and (width < 429px) {
+
+    .container{
+        margin: 9rem 0 0;
+        height: 31.5rem;
+        width: 22rem;
+    }
+
+    h2{
+        font-size: 2rem;
+        margin: 120px 0 30px;
+    }
+    h3{
+        font-size: 1.8rem;
+    }
+
+    .player-img{
+        margin: 0 auto;
+        width: 18rem;
+        height: 15rem;
+        top: -5%;
+    }
+
+ .player-progress span{
+        font-size: .8rem;
+    }
+    
+    .player-controls{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin: 0 auto 1rem;
+
+        & .fa-solid{
+            font-size: 1.5rem;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover{
+                filter: brightness(40%);
+            }
+        }
+
+        & .play-button{
+            font-size: 2.5rem;
+            position: relative;
+        }
+    }
+
+    h2{
+        margin: 3rem auto 0;
+        font-size: 1.5rem;
+    }
+    h3{
+        font-size: 1.2rem;
+    }
+
+    .card-data{
+        width: 17.4rem;
+        height: 13.5rem;
+        margin: 0 .3rem;
+        top: 10.5rem;
+
+        & span{
+            font-size: 1rem;
+        }
+    }
+
+    @keyframes show-data{
+        50%{
+            transform: translateY(-10rem);
+        }
+    }
+    
+    @keyframes remove-data {
+        0%{
+            transform: translateY(-1rem);
+        }
+        50%{
+            transform: translateY(-10rem);
+        }
+        100%{
+            transform: translateY(2rem);
+        }
+    }
+}
+
+@media (width > 321px) and (width < 391px){
+    header{
+        height: 4rem;
+    }
+    
+    .container{
+        margin: 7rem 0 0;
+        height: 28rem;
+        width: 20rem;        
+    }
+    
+    .player-img{
+        margin: 0 auto;
+        width: 18rem;
+        height: 15rem;
+        top: -2%;
+    }
+
+    .player-progress span{
+        font-size: .8rem;
+    }
+    
+    .player-controls{
+        position: relative;
+        display: flex;
+        gap: 2rem;
+        margin: 0 auto 1rem;
+
+        & .fa-solid{
+            font-size: 1.5rem;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover{
+                filter: brightness(40%);
+            }
+        }
+
+        & .play-button{
+            font-size: 2.5rem;
+            position: relative;
+        }
+    }
+
+    h2{
+        font-size: 1.5rem;
+    }
+    h3{
+        font-size: 1.2rem;
+    }
+
+    .card-data{
+        width: 17.4rem;
+        height: 16.5rem;
+        margin: 0 .3rem;
+
+        & span{
+            font-size: 1rem;
+        }
+    }
+
+}
+@media (width < 321px) {
+    header{
+        height: 3rem;
+        width: 100%;
+    }
+    
+    .container{
+        margin: 4rem 0 0;
+        height: 22rem;
+        width: 18rem;    
+    }
+    
+    .player-img{
+        margin: 0 auto;
+        width: 17rem;
+        height: 15rem;
+        top: -3%;
+
+        & img{
+        }
+    }
+
+    .player-progress{
+        margin: 1rem;
+    }
+
+    .player-progress span{
+        font-size: .8rem;
+    }
+    
+    .player-controls{
+        position: relative;
+        display: flex;
+        gap: 2rem;
+        margin: 0 auto 1rem;
+
+        & .fa-solid{
+            font-size: 1.5rem;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover{
+                filter: brightness(40%);
+            }
+        }
+
+        & .play-button{
+            font-size: 2.3rem;
+            position: relative;
+        }
+    }
+
+    h2{
+        margin-top: 0;
+        font-size: 1.4rem;
+    }
+    h4{
+        font-size: 1.3rem;
+    }
+    h3{
+        font-size: 1.1rem;
+    }
+
+    .card-data{
+        width: 16.4rem;
+        height: 13.5rem;
+        margin: 0 .3rem;
+
+        & span{
+            font-size: 1rem;
+        }
+    }
+
+    footer{
+        height: 2rem;
+    }
+
+    @keyframes show-data{
+        50%{
+            transform: translateY(-9.5rem);
+        }
+        100%{
+            transform: translateY(-8rem);
+        }
+    }
+
+    @keyframes remove-data {
+    0%{
+        transform: translateY(-7rem);
+    }
+    50%{
+        transform: translateY(-9.5rem);
+    }
+    100%{
+        transform: translateY(-.2rem);
+    }
+}
+
+}
